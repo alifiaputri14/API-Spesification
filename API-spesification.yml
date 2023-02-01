@@ -1,0 +1,115 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  description: api documentation
+
+  version: '1.0'
+servers:
+
+  - url: https://api.server.test/v1
+    
+externalDocs:
+  url: https://docs.faspay.co.id/
+  description: api documentation
+paths:
+  /payments:
+    post:
+      summary: get inquiry transaction
+      description: get virtual account number info
+      requestBody:
+        required: true
+        content:
+          aplications/json:
+            schema:
+              properties:
+                name: 
+                  type: string
+                  required: true
+                  minLength: 1
+                VA_number:
+                  type: number
+                  required: true
+                  minLength: 1
+                amount:
+                  type: number
+                  required: true
+                  minLength: 1
+                cust_name:
+                  type: string
+                  required: true
+                  minLength: 1
+
+
+
+
+
+          
+      responses:
+        '00':
+          description: Success
+        '01':
+          description: Failed
+      parameters:
+        - name: responses
+          required: true,
+          description: VA static responses
+          in: path
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          
+
+        - name: VA_number 
+          required: true 
+          description: virtual account number
+          in: path 
+          schema:
+            type: number
+            minLength: 1
+            maxLength: 16
+        - name: amount,
+          required: true,
+          description: amount ,
+          in: path
+          schema:
+            type: number
+        - name: cust_name,
+          required: true,
+          description: nomor ID Customer
+          in: path
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+        - name: respone_code
+          required: true
+          in: path
+          schema:
+            type: character
+            minLength: 1
+            maxLength: 2
+
+  /payments/amount:      
+    post:
+      summary: get inquiry payment
+      description: get all amount and trx_id info
+      requestBody:
+        required: true
+        content:
+          aplications/json:
+            schema:
+            
+      responses:
+        '00':
+          description:  Success
+
+  /payments/notification:
+    get:
+      summary: post payment notification
+      description: post notification payment status info
+      responses:
+        '00':
+          description:  Success
+        '01':
+          description: Failed
